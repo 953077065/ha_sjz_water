@@ -1,6 +1,8 @@
 {
   "name": "石家庄供水水费",
+  "description": "石家庄供水集团水费查询集成 — 周期性拉取水费账单, 暴露传感器实体, 支持历史月度趋势曲线。",
   "render_readme": true,
   "homeassistant": "2024.8.0",
-  "country": ["CN"]
+  "country": ["CN"],
+  "keywords": ["water", "bill", "石家庄", "供水", "水费"]
 }
