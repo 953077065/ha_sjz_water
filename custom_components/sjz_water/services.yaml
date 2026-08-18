@@ -1,0 +1,5 @@
+# 此文件描述集成对外暴露的服务(若需要)。当前未启用任何 service。
+# 启用服务示例:
+# refresh:
+#   name: Refresh data
+#   description: 立即触发一次数据拉取

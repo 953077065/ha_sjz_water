@@ -1,0 +1,45 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "石家庄供水水费集成",
+        "description": "填写接口地址、用户卡号、粉丝ID、验证码等信息。",
+        "data": {
+          "base_url": "接口基础 URL",
+          "card_id": "卡号 (cardId)",
+          "fans_id": "粉丝ID (fansId/UserId)",
+          "verify": "验证码 (verfiy)",
+          "cookie": "Cookie (可选, 含鉴权信息)",
+          "start_bm": "起始账期 (YYYYMM)",
+          "end_bm": "结束账期 (YYYYMM)",
+          "scan_interval": "轮询间隔 (秒)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "无法连接到接口",
+      "invalid_auth": "鉴权失败",
+      "unknown": "未知错误"
+    },
+    "abort": {
+      "already_configured": "该卡号已配置"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "选项",
+        "description": "修改鉴权参数、账期与轮询间隔。",
+        "data": {
+          "verify": "验证码 (verfiy)",
+          "fans_id": "粉丝ID (fansId/UserId)",
+          "card_id": "卡号 (cardId)",
+          "cookie": "Cookie (可选, 含鉴权信息)",
+          "start_bm": "起始账期 (YYYYMM)",
+          "end_bm": "结束账期 (YYYYMM)",
+          "scan_interval": "轮询间隔 (秒)"
+        }
+      }
+    }
+  }
+}

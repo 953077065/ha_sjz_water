@@ -1,0 +1,45 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Shijiazhuang Water Billing",
+        "description": "Configure the API URL, card ID, fans ID, verify token, and other parameters.",
+        "data": {
+          "base_url": "Base URL",
+          "card_id": "Card ID",
+          "fans_id": "Fans / User ID",
+          "verify": "Verify Token",
+          "cookie": "Cookie (optional)",
+          "start_bm": "Start Billing Month (YYYYMM)",
+          "end_bm": "End Billing Month (YYYYMM)",
+          "scan_interval": "Polling interval (sec)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the API",
+      "invalid_auth": "Authentication failed",
+      "unknown": "Unknown error"
+    },
+    "abort": {
+      "already_configured": "This card ID is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "description": "Modify authentication parameters, billing months, and polling interval.",
+        "data": {
+          "verify": "Verify Token",
+          "fans_id": "Fans / User ID",
+          "card_id": "Card ID",
+          "cookie": "Cookie (optional)",
+          "start_bm": "Start Billing Month (YYYYMM)",
+          "end_bm": "End Billing Month (YYYYMM)",
+          "scan_interval": "Polling interval (sec)"
+        }
+      }
+    }
+  }
+}
