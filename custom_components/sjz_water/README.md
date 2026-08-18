@@ -17,7 +17,7 @@
 
 1. 在 HA 中安装 [HACS](https://hacs.xyz) (如未安装)
 2. HACS → 集成 → 右上角菜单 → 自定义仓库
-3. 添加本仓库地址: `https://github.com/yourname/ha-sjz-water`
+3. 添加本仓库地址: `https://github.com/953077065/ha_sjz_water`
 4. 在「石家庄供水水费」集成点击「安装」
 5. 重启 Home Assistant
 6. 设置 → 设备与服务 → 添加集成 → 搜索「石家庄供水水费」
