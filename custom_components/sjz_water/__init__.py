@@ -14,10 +14,8 @@ from .const import (
     CONF_BASE_URL,
     CONF_CARD_ID,
     CONF_COOKIE,
-    CONF_END_BM,
     CONF_FANS_ID,
     CONF_SCAN_INTERVAL,
-    CONF_START_BM,
     CONF_VERIFY,
     DEFAULT_SCAN_INTERVAL,
     PLATFORMS,
@@ -41,8 +39,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: CustomApiConfigEntry) ->
         CONF_FANS_ID: _cfg(CONF_FANS_ID),
         CONF_VERIFY: _cfg(CONF_VERIFY),
         CONF_COOKIE: _cfg(CONF_COOKIE),
-        CONF_START_BM: _cfg(CONF_START_BM, "202409"),
-        CONF_END_BM: _cfg(CONF_END_BM, "202609"),
         CONF_SCAN_INTERVAL: _cfg(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL),
     }
 

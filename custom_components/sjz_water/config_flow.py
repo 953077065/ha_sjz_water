@@ -14,15 +14,11 @@ from .const import (
     CONF_BASE_URL,
     CONF_CARD_ID,
     CONF_COOKIE,
-    CONF_END_BM,
     CONF_FANS_ID,
     CONF_SCAN_INTERVAL,
-    CONF_START_BM,
     CONF_VERIFY,
     DEFAULT_BASE_URL,
-    DEFAULT_END_BM,
     DEFAULT_SCAN_INTERVAL,
-    DEFAULT_START_BM,
     DOMAIN,
 )
 
@@ -61,12 +57,6 @@ class CustomApiConfigFlow(ConfigFlow, domain=DOMAIN):
                     vol.Required(CONF_VERIFY): str,
                     vol.Optional(CONF_COOKIE): str,
                     vol.Optional(
-                        CONF_START_BM, default=DEFAULT_START_BM
-                    ): str,
-                    vol.Optional(
-                        CONF_END_BM, default=DEFAULT_END_BM
-                    ): str,
-                    vol.Optional(
                         CONF_SCAN_INTERVAL, default=DEFAULT_SCAN_INTERVAL
                     ): vol.All(int, vol.Range(min=10)),
                 }
@@ -82,7 +72,7 @@ class CustomApiConfigFlow(ConfigFlow, domain=DOMAIN):
 
 
 class CustomApiOptionsFlow:
-    """选项流程: 允许修改鉴权参数、账期、轮询间隔。"""
+    """选项流程: 允许修改鉴权参数与轮询间隔。"""
 
     def __init__(self, config_entry: "CustomApiConfigEntry") -> None:
         self._config_entry = config_entry
@@ -115,12 +105,6 @@ class CustomApiOptionsFlow:
                     ): str,
                     vol.Optional(
                         CONF_COOKIE, default=self._current(CONF_COOKIE, "")
-                    ): str,
-                    vol.Optional(
-                        CONF_START_BM, default=self._current(CONF_START_BM, DEFAULT_START_BM)
-                    ): str,
-                    vol.Optional(
-                        CONF_END_BM, default=self._current(CONF_END_BM, DEFAULT_END_BM)
                     ): str,
                     vol.Optional(
                         CONF_SCAN_INTERVAL,

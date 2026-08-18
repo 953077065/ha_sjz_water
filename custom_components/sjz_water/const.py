@@ -18,13 +18,9 @@ CONF_CARD_ID: Final[str] = "card_id"
 CONF_FANS_ID: Final[str] = "fans_id"
 CONF_VERIFY: Final[str] = "verify"
 CONF_COOKIE: Final[str] = "cookie"
-CONF_START_BM: Final[str] = "start_bm"
-CONF_END_BM: Final[str] = "end_bm"
 CONF_SCAN_INTERVAL: Final[str] = "scan_interval"
 
 DEFAULT_BASE_URL: Final[str] = "http://www.sjzgsgs.com/preapi/wap/mcs/v1"
-DEFAULT_START_BM: Final[str] = "202409"
-DEFAULT_END_BM: Final[str] = "202609"
 
 ATTR_RAW_DATA: Final[str] = "raw_data"
 ATTR_UPDATED_AT: Final[str] = "updated_at"

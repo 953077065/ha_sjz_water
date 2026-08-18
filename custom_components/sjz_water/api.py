@@ -1,11 +1,12 @@
 """API 客户端 — 石家庄供水水费查询接口。
 
-返回完整月度账单数组, 供历史回填与当前值读取。
+自动查询近 3 个月账单, 返回完整月度账单数组, 供历史回填与当前值读取。
 """
 from __future__ import annotations
 
 import asyncio
 import logging
+from datetime import datetime
 from typing import Any
 
 import aiohttp
@@ -15,9 +16,7 @@ from .const import (
     CONF_BASE_URL,
     CONF_CARD_ID,
     CONF_COOKIE,
-    CONF_END_BM,
     CONF_FANS_ID,
-    CONF_START_BM,
     CONF_VERIFY,
 )
 
@@ -36,8 +35,30 @@ class ApiParseError(Exception):
     """响应解析失败。"""
 
 
+def _compute_billing_months() -> tuple[str, str]:
+    """计算近 3 个月的起止账期 (YYYYMM)。
+
+    返回 (start_bm, end_bm), 如当前 2026-08 则返回 ("202606", "202608")。
+    """
+    now = datetime.now()
+    year = now.year
+    month = now.month
+    end_bm = f"{year:04d}{month:02d}"
+
+    # 2 个月前作为起始
+    month -= 2
+    while month <= 0:
+        month += 12
+        year -= 1
+    start_bm = f"{year:04d}{month:02d}"
+    return start_bm, end_bm
+
+
 class CustomApiClient:
-    """石家庄供水水费 API 客户端。"""
+    """石家庄供水水费 API 客户端。
+
+    自动计算近 3 个月账期, 无需外部传入。
+    """
 
     def __init__(
         self,
@@ -47,8 +68,6 @@ class CustomApiClient:
         fans_id: str,
         verify: str,
         cookie: str | None = None,
-        start_bm: str = "202409",
-        end_bm: str = "202609",
         timeout: int = 15,
     ) -> None:
         self._session = session
@@ -57,8 +76,6 @@ class CustomApiClient:
         self._fans_id = fans_id
         self._verify = verify
         self._cookie = cookie
-        self._start_bm = start_bm
-        self._end_bm = end_bm
         self._timeout = aiohttp.ClientTimeout(total=timeout)
 
     @property
@@ -67,9 +84,10 @@ class CustomApiClient:
 
     @property
     def _query_params(self) -> dict[str, str]:
+        start_bm, end_bm = _compute_billing_months()
         return {
-            "startBM": self._start_bm,
-            "endBM": self._end_bm,
+            "startBM": start_bm,
+            "endBM": end_bm,
             "fansId": self._fans_id,
             "isPayAgentCheck": "0",
         }
@@ -100,7 +118,7 @@ class CustomApiClient:
         return headers
 
     async def async_fetch_data(self) -> list[dict[str, Any]]:
-        """拉取全部月度账单, 返回记录列表(最新在前)。
+        """拉取近 3 个月账单, 返回记录列表(最新在前)。
 
         :raises ApiAuthError: 业务 code != 0 或 HTTP 401/403
         :raises ApiConnectionError: 网络/超时
@@ -157,6 +175,4 @@ async def async_build_client(
         fans_id=config[CONF_FANS_ID],
         verify=config[CONF_VERIFY],
         cookie=config.get(CONF_COOKIE),
-        start_bm=config.get(CONF_START_BM, "202409"),
-        end_bm=config.get(CONF_END_BM, "202609"),
     )
